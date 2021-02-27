@@ -1,7 +1,7 @@
-require "test_helper"
+require 'rails_helper'
 
-class RatingTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+RSpec.describe Rating, type: :model do
+  describe 'relationships' do
+    it { should belong_to :movie }
+  end
 end
