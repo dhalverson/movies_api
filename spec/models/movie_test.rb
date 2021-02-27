@@ -1,7 +1,7 @@
-require "test_helper"
+require 'rails_helper'
 
-class MovieTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+RSpec.describe Movie, type: :model do
+  describe 'relationships' do
+    it { should have_many :ratings }
+  end
 end
