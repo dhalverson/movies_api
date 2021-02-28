@@ -3,11 +3,10 @@ require 'rails_helper'
 RSpec.describe 'Movies API' do
   it 'Sends a list of all movies' do
     create_list(:movie, 10)
-    get(movies_path)
+    get(api_v1_movies_path)
 
     expect(response).to be_successful
     movies = JSON.parse(response.body, symbolize_names: true)
-
     expect(movies.count).to eq(10)
     movies.each do |movie|
       expect(movie).to have_key :imdb_id
