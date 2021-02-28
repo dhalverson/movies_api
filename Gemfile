@@ -25,6 +25,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'figaro'
 gem 'faraday'
 gem 'jsonapi-serializer'
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   gem 'pry'
