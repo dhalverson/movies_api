@@ -9,7 +9,7 @@ class Api::V1::MoviesController < ApplicationController
   end
 
   def show
-    movie = Movie.find(params[:id])
-    render json: MovieSerializer.new(movie)
+    @movie = Movie.find(params[:id])
+    render json: MovieDetailSerializer.new(@movie)
   end
 end
