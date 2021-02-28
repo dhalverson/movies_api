@@ -8,6 +8,22 @@ RSpec.describe 'Movies API' do
     expect(response).to be_successful
     movies = JSON.parse(response.body, symbolize_names: true)
 
-    require 'pry'; binding.pry
+    expect(movies.count).to eq(10)
+    movies.each do |movie|
+      expect(movie).to have_key :imdb_id
+      expect(movie[:imdb_id]).to be_a(String)
+
+      expect(movie).to have_key :title
+      expect(movie[:title]).to be_a(String)
+
+      expect(movie).to have_key :genres
+      expect(movie[:genres]).to be_a(String)
+
+      expect(movie).to have_key :release_date
+      expect(movie[:release_date]).to be_a(String)
+
+      expect(movie).to have_key :budget
+      expect(movie[:budget]).to be_an(Integer)
+    end
   end
 end
