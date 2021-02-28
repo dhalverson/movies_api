@@ -16,7 +16,7 @@ RSpec.describe 'Movies API' do
       expect(movie[:attributes][:title]).to be_a(String)
 
       expect(movie[:attributes]).to have_key :genres
-      expect(movie[:attributes][:genres]).to be_a(String)
+      expect(movie[:attributes][:genres]).to be_an(Array)
 
       expect(movie[:attributes]).to have_key :release_date
       expect(movie[:attributes][:release_date]).to be_a(String)
@@ -26,7 +26,7 @@ RSpec.describe 'Movies API' do
     end
   end
 
-  # Need to determine a way to test the page query params work correctly
+  # Need to determine a way to test the page query params work correctly, and navigate to the page specified
   xit 'Sends a list of all movies with a page query' do
     create_list(:movie, 15)
     get(api_v1_movies_path, :params => {:page => 2})
@@ -42,7 +42,7 @@ RSpec.describe 'Movies API' do
       expect(movie[:attributes][:title]).to be_a(String)
 
       expect(movie[:attributes]).to have_key :genres
-      expect(movie[:attributes][:genres]).to be_a(String)
+      expect(movie[:attributes][:genres]).to be_an(Array)
 
       expect(movie[:attributes]).to have_key :release_date
       expect(movie[:attributes][:release_date]).to be_a(String)
