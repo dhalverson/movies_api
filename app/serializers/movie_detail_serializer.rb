@@ -1,9 +1,13 @@
 class MovieDetailSerializer
   include JSONAPI::Serializer
-  attributes :imdb_id, :title, :release_date, :budget, :runtime, :genres, :production_companies
+  attributes :imdb_id, :title, :release_date, :runtime, :genres, :production_companies
  
   attribute :description do |object|
     object[:overview]
+  end
+
+  attribute :budget do |object|
+    "$#{object.budget}"
   end
 
   # If covers if a movie has no ratings(Movie id 16)
