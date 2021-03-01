@@ -8,4 +8,9 @@ RSpec.describe Movie, type: :model do
   describe 'relationships' do
     it { should have_many :ratings }
   end
+
+  describe 'methods' do
+    
+    
+  end
 end
