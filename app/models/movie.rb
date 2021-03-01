@@ -12,7 +12,7 @@ class Movie < ApplicationRecord
   validates :status, presence: true
   # serialize :genres, Array
   
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
 
   def average_rating
     if ratings.blank?
