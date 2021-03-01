@@ -74,4 +74,18 @@ RSpec.describe 'Movies API' do
     expect(movie[:data][:attributes]).to have_key :budget
     expect(movie[:data][:attributes][:budget]).to be_a(String)
   end
+
+  it 'Can return movies by release year' do
+    movie1 = create(:movie, release_date: '2020-01-01')
+    movie2 = create(:movie, release_date: '2010-01-01')
+    movie3 = create(:movie, release_date: '2010-01-01')
+
+    get(api_v1_movies_path, :params => {:year => 2010})
+
+    expect(response).to be_successful
+    movie = JSON.parse(response.body, symbolize_names: true)
+
+    expect(movie[:data].count).to eq(2)
+    expect(movie[:data].first[:attributes][:release_date]).to eq('2010-01-01')
+  end  
 end
