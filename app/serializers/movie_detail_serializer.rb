@@ -1,9 +1,15 @@
 class MovieDetailSerializer
   include JSONAPI::Serializer
-  attributes :imdb_id, :title, :release_date, :budget, :runtime, :genres, :production_companies
+  attributes :imdb_id, :title, :release_date, :runtime, :genres, :production_companies
  
+  # Changes overview to description to match user story
   attribute :description do |object|
     object[:overview]
+  end
+
+  # Adds $ in front of budget integer
+  attribute :budget do |object|
+    "$#{object.budget}"
   end
 
   # If covers if a movie has no ratings(Movie id 16)
@@ -15,6 +21,7 @@ class MovieDetailSerializer
     end
   end
 
+  # Maps over array of hashes, and returns array of genres
   attribute :genres do |object|
     genre_array = JSON.parse(object[:genres], symbolize_names: true)
     genre_array.map do |genre|
