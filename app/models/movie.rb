@@ -1,9 +1,19 @@
 class Movie < ApplicationRecord
+  validates :imdb_id, presence: true
+  validates :title, presence: true
+  validates :overview, presence: true
+  validates :production_companies, presence: true
+  validates :release_date, presence: true
+  validates :budget, presence: true
+  validates :revenue, presence: true
+  validates :runtime, presence: true
+  validates :language, presence: true
+  validates :genres, presence: true
+  validates :status, presence: true
   # serialize :genres, Array
   
   has_many :ratings
 
-  # This logic should live in the model, but having issues getting it to show in serializer
   def average_rating
     if ratings.blank?
       'No Ratings Available!'
