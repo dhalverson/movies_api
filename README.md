@@ -41,11 +41,13 @@ rails s
 ```
 - App will be available locally at http://localhost:3000/
 - Current working endpoints are:
-- 
-- Movie Index api/v1/movies
+
+### Movie Index api/v1/movies
+
 [![Screen-Shot-2021-02-28-at-7-46-05-PM.png](https://i.postimg.cc/J0CJxmRs/Screen-Shot-2021-02-28-at-7-46-05-PM.png)](https://postimg.cc/dknLQbkF)
 
-- Movie Show api/v1/movies/2
+### Movie Show api/v1/movies/2
+
 [![Screen-Shot-2021-02-28-at-7-46-19-PM.png](https://i.postimg.cc/FsZcy28K/Screen-Shot-2021-02-28-at-7-46-19-PM.png)](https://postimg.cc/Xprp3DVM)
 
 ## Tests
