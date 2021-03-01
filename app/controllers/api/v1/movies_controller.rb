@@ -5,7 +5,7 @@ class Api::V1::MoviesController < ApplicationController
     else
       movies = Movie.paginate(page: 1, per_page: 5)
     end
-      render json: MovieSerializer.new(movies)
+    render json: MovieSerializer.new(movies)
   end
 
   def show

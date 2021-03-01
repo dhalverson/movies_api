@@ -58,7 +58,6 @@ RSpec.describe 'Movies API' do
 
     expect(response).to be_successful
     movie = JSON.parse(response.body, symbolize_names: true)
-    require 'pry'; binding.pry
 
     expect(movie[:attributes]).to have_key :imdb_id
     expect(movie[:attributes][:imdb_id]).to be_a(String)

@@ -1,15 +1,14 @@
 class Movie < ApplicationRecord
-  attr_accessor :average_rating
-  serialize :genres, Array
+  # serialize :genres, Array
   
   has_many :ratings
 
-  # Was unsure if this business logic should be handled here, or the Serialzier
-  # def self.average_rating
-  #   if self.ratings.blank?
-  #     'No Ratings Available!'
-  #   else
-  #     (self.ratings.map(&:rating).sum / self.ratings.size).round(2)
-  #   end
-  # end
+  # This logic should live in the model, but having issues getting it to show in serializer
+  def average_rating
+    if ratings.blank?
+      'No Ratings Available!'
+    else
+      (ratings.map(&:rating).sum / ratings.size).round(2)
+    end
+  end
 end

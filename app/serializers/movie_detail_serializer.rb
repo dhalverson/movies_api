@@ -1,9 +1,7 @@
 class MovieDetailSerializer
   include JSONAPI::Serializer
   attributes :imdb_id, :title, :release_date, :budget, :runtime, :genres, :production_companies
-
-  has_many :ratings
-  
+ 
   attribute :description do |object|
     object[:overview]
   end
@@ -13,7 +11,7 @@ class MovieDetailSerializer
     if object.ratings.blank?
       'No Ratings Available!'
     else
-      (object.ratings.map(&:rating).sum / object.ratings.size).round(2)
+      object.average_rating
     end
   end
 
