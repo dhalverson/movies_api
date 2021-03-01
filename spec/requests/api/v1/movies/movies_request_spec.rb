@@ -50,5 +50,28 @@ RSpec.describe 'Movies API' do
       expect(movie[:attributes]).to have_key :budget
       expect(movie[:attributes][:budget]).to be_a(String)
     end
-  end  
+  end
+  
+  it 'Can return a single movie by ID' do
+    movie = create(:movie)
+    get(api_v1_movie_path(movie))
+
+    expect(response).to be_successful
+    movie = JSON.parse(response.body, symbolize_names: true)
+
+    expect(movie[:attributes]).to have_key :imdb_id
+    expect(movie[:attributes][:imdb_id]).to be_a(String)
+
+    expect(movie[:attributes]).to have_key :title
+    expect(movie[:attributes][:title]).to be_a(String)
+
+    expect(movie[:attributes]).to have_key :genres
+    expect(movie[:attributes][:genres]).to be_an(Array)
+
+    expect(movie[:attributes]).to have_key :release_date
+    expect(movie[:attributes][:release_date]).to be_a(String)
+
+    expect(movie[:attributes]).to have_key :budget
+    expect(movie[:attributes][:budget]).to be_a(String)
+  end
 end
