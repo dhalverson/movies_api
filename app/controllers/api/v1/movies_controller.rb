@@ -6,6 +6,7 @@ class Api::V1::MoviesController < ApplicationController
     @movie = Movie.where(nil)
     movies = @movie.paginate(page: page, per_page: 5)
     movies = @movie.filter_by_release_date(movie_params[:year]).paginate(page: page, per_page: 5) if movie_params[:year].present?
+    movies = @movie.filter_by_genre(movie_params[:genre]).paginate(page: page, per_page: 5) if movie_params[:genre].present?
     render json: MovieSerializer.new(movies)
   end
 
@@ -17,6 +18,6 @@ class Api::V1::MoviesController < ApplicationController
   private
 
   def movie_params
-    params.permit(:id, :page, :year)
+    params.permit(:id, :page, :year, :genre)
   end
 end

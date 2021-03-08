@@ -31,7 +31,6 @@ RSpec.describe 'Movies API' do
     get(api_v1_movies_path, :params => {:page => 2})
 
     expect(response).to be_successful
-    expect(response.request).to eq('a')
     movies = JSON.parse(response.body, symbolize_names: true)
 
     movies[:data].each do |movie|
@@ -94,8 +93,8 @@ RSpec.describe 'Movies API' do
     movie2 = create(:movie, genres: "[{\"id\": 19, \"name\": \"Drama\"}, {\"id\": 81, \"name\": \"Comedy\"}]")
     movie3 = create(:movie, genres: "[{\"id\": 20, \"name\": \"Drama\"}, {\"id\": 82, \"name\": \"Crime\"}]")
 
-    get(api_v1_movies_path, :params => {:genre => comedy})
-    require 'pry'; binding.pry
+    get(api_v1_movies_path, :params => {:genre => 'comedy'})
+
     expect(response).to be_successful
     movie = JSON.parse(response.body, symbolize_names: true)
 
@@ -103,3 +102,4 @@ RSpec.describe 'Movies API' do
     expect(movie[:data].first[:attributes][:genre]).should include('Comedy')
   end  
 end
+!!

@@ -15,7 +15,7 @@ class Movie < ApplicationRecord
   has_many :ratings, dependent: :destroy
 
   scope :filter_by_release_date, -> (year) { where('release_date LIKE ?', "#{year}%" )}
-
+  scope :filter_by_genre, -> (genre) { where('genres ILIKE? ', "%#{genre}%" )}
   def average_rating
     if ratings.blank?
       'No Ratings Available!'
