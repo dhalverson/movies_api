@@ -3,10 +3,7 @@ class Api::V1::MoviesController < ApplicationController
   # movies = Movie.where('release_date LIKE ?', "#{movie_params[:year]}%").paginate(page: page, per_page: 5)
   def index
     page = movie_params[:page] || 1
-    @movie = Movie.where(nil)
-    movies = @movie.paginate(page: page, per_page: 5)
-    movies = @movie.filter_by_release_date(movie_params[:year]).paginate(page: page, per_page: 5) if movie_params[:year].present?
-    movies = @movie.filter_by_genre(movie_params[:genre]).paginate(page: page, per_page: 5) if movie_params[:genre].present?
+    movies = Movie.filter(params.slice(:id, :page, :year, :genre)).paginate(page: page, per_page: 5)
     render json: MovieSerializer.new(movies)
   end
 
