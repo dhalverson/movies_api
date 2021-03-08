@@ -7,7 +7,6 @@ RSpec.describe 'Movies API' do
 
     expect(response).to be_successful
     movies = JSON.parse(response.body, symbolize_names: true)
-
     movies[:data].each do |movie|
       expect(movie[:attributes]).to have_key :imdb_id
       expect(movie[:attributes][:imdb_id]).to be_a(String)
@@ -27,11 +26,12 @@ RSpec.describe 'Movies API' do
   end
 
   # Need to determine a way to test the page query params work correctly, and navigate to the page specified
-  xit 'Sends a list of all movies with a page query' do
+  it 'Sends a list of all movies with a page query' do
     create_list(:movie, 15)
     get(api_v1_movies_path, :params => {:page => 2})
 
     expect(response).to be_successful
+    expect(response.request).to eq('a')
     movies = JSON.parse(response.body, symbolize_names: true)
 
     movies[:data].each do |movie|
@@ -90,12 +90,12 @@ RSpec.describe 'Movies API' do
   end  
 
   it 'Can return movies by genre keyword' do
-    movie1 = create(:movie, genre: "[{\"id\": 18, \"name\": \"Comedy\"}, {\"id\": 80, \"name\": \"Romance\"}]")
-    movie2 = create(:movie, genre: "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 80, \"name\": \"Comedy\"}]")
-    movie3 = create(:movie, genre: "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 80, \"name\": \"Crime\"}]")
+    movie1 = create(:movie, genres: "[{\"id\": 18, \"name\": \"Comedy\"}, {\"id\": 80, \"name\": \"Romance\"}]")
+    movie2 = create(:movie, genres: "[{\"id\": 19, \"name\": \"Drama\"}, {\"id\": 81, \"name\": \"Comedy\"}]")
+    movie3 = create(:movie, genres: "[{\"id\": 20, \"name\": \"Drama\"}, {\"id\": 82, \"name\": \"Crime\"}]")
 
     get(api_v1_movies_path, :params => {:genre => comedy})
-
+    require 'pry'; binding.pry
     expect(response).to be_successful
     movie = JSON.parse(response.body, symbolize_names: true)
 
