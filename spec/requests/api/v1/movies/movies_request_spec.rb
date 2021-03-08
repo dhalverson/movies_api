@@ -99,7 +99,6 @@ RSpec.describe 'Movies API' do
     movie = JSON.parse(response.body, symbolize_names: true)
 
     expect(movie[:data].count).to eq(2)
-    expect(movie[:data].first[:attributes][:genre]).should include('Comedy')
+    expect(movie[:data].first[:attributes][:genres]).to include('Comedy')
   end  
 end
-!!
