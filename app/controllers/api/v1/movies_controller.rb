@@ -2,8 +2,9 @@ class Api::V1::MoviesController < ApplicationController
   # Logic to handle if multiple params are included
   def index
     page = movie_params[:page] || 1
-
-    movies = Movie.where('release_date LIKE ?', "#{movie_params[:year]}%").paginate(page: page, per_page: 5)
+    # movies = Movie.where('release_date LIKE ?', "#{movie_params[:year]}%").paginate(page: page, per_page: 5)
+    @movie = Movie.where(nil)
+    movies = @movie.filter_by_release_date(movie_params[:year]) if movie_params[:year].present?
     render json: MovieSerializer.new(movies)
   end
 

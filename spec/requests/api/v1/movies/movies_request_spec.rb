@@ -88,4 +88,18 @@ RSpec.describe 'Movies API' do
     expect(movie[:data].count).to eq(2)
     expect(movie[:data].first[:attributes][:release_date]).to eq('2010-01-01')
   end  
+
+  it 'Can return movies by genre keyword' do
+    movie1 = create(:movie, genre: "[{\"id\": 18, \"name\": \"Comedy\"}, {\"id\": 80, \"name\": \"Romance\"}]")
+    movie2 = create(:movie, genre: "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 80, \"name\": \"Comedy\"}]")
+    movie3 = create(:movie, genre: "[{\"id\": 18, \"name\": \"Drama\"}, {\"id\": 80, \"name\": \"Crime\"}]")
+
+    get(api_v1_movies_path, :params => {:genre => comedy})
+
+    expect(response).to be_successful
+    movie = JSON.parse(response.body, symbolize_names: true)
+
+    expect(movie[:data].count).to eq(2)
+    expect(movie[:data].first[:attributes][:genre]).should include('Comedy')
+  end  
 end
